@@ -56,7 +56,7 @@ public class InvoiceRequest
     [Required]
     public string? Currency { get; init; }
 
-    public string? LogoUrl { get; init; } = "https://upload.wikimedia.org/wikipedia/commons/8/80/Logo_acme.svg";
+    public string? LogoUrl { get; init; }
 
     [Required]
     public IEnumerable<InvoiceItem> Items { get; init; } = Array.Empty<InvoiceItem>();
