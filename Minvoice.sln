@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{33E81DBD-11BF-45CD-918E-D401D80412A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Html2Pdf", "src\Html2Pdf\Html2Pdf.csproj", "{3ABE9640-D712-40D3-B08B-663F47502573}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minvoice", "src\Minvoice\Minvoice.csproj", "{3ABE9640-D712-40D3-B08B-663F47502573}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

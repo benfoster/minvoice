@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "html2pdf": {
+    "minvoice": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

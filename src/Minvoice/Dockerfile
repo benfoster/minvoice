@@ -1,15 +1,15 @@
-## Build Html2Pdf
+## Build Minvoice
 FROM mcr.microsoft.com/dotnet/sdk:6.0.100-rc.1-focal-amd64 as build
 
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY src/Html2Pdf/Html2Pdf.csproj .
+COPY src/Minvoice/Minvoice.csproj .
 COPY nuget.config .
 RUN dotnet restore --runtime ubuntu.20.04-x64
 
 # copy everything else and build app
-COPY ./src/Html2Pdf .
+COPY ./src/Minvoice .
 RUN dotnet publish --runtime ubuntu.20.04-x64 -c Release -o /publish --self-contained true --no-restore
 
 FROM ubuntu:focal
@@ -58,11 +58,11 @@ RUN addgroup --group dotnetuser --gid 2000 \
         --gecos '' \
         "dotnetuser" 
 
-# Add Html2Pdf
+# Add Minvoice
 COPY --from=build --chown=dotnetuser:dotnetuser /publish/ /app/
 
 USER dotnetuser:dotnetuser 
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://*:5000
 WORKDIR /app
-ENTRYPOINT [ "./Html2Pdf" ]
+ENTRYPOINT [ "./Minvoice" ]
