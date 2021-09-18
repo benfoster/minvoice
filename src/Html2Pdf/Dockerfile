@@ -25,9 +25,6 @@ RUN apt-get update && apt-get install -y curl && \
 RUN apt-get update && apt-get install -y --no-install-recommends git ssh && \
     npm install -g yarn
 
-# Create the pwuser (we internally create a symlink for the pwuser and the root user)
-RUN adduser pwuser
-
 # Install Python 3.8
 
 RUN apt-get update && apt-get install -y python3.8 python3-pip && \
@@ -51,10 +48,21 @@ RUN mkdir /ms-playwright && \
     rm -rf /tmp/pw && \
     chmod -R 777 /ms-playwright
 
+# Use non-root user
+RUN addgroup --group dotnetuser --gid 2000 \
+    && adduser \    
+        --uid 1000 \
+        --gid 2000 \
+        --disabled-password \
+        --home /app \
+        --gecos '' \
+        "dotnetuser" 
+
 # Add Html2Pdf
-COPY --from=build --chown=pwuser:pwuser /publish/ /app/
+COPY --from=build --chown=dotnetuser:dotnetuser /publish/ /app/
+
+USER dotnetuser:dotnetuser 
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://*:5000
 WORKDIR /app
-USER pwuser:pwuser 
 ENTRYPOINT [ "./Html2Pdf" ]
