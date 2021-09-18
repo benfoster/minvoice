@@ -2,14 +2,21 @@
 
 Minvoice is a minimal PDF invoice generation API built using ASP.NET Core. It uses [Playwright](https://playwright.dev/) to convert a rendered HTML template to PDF using Chromium.
 
-## Building and running locally
+## Run in Docker
 
-Minvoice takes advantage of a number of new features in .NET 6 and C# 10. To run locally you'll need to [install .NET 6.0 rc1](https://github.com/dotnet/installer).
-
-To run the application:
+The fastest way to launch Minvoice is via [Docker](https://hub.docker.com/r/benfoster/minvoice):
 
 ```
-dotnet run --project ./src/Minvoice/Minvoice.csproj
+docker run -p 5000:5000 --rm -it benfoster/minvoice:latest
+```
+
+_Note that the image is quite large (~500MB) due to Playwright's dependencies_
+
+You can override the [default invoice template](./src/Minvoice/invoice-template.html) with your own HTML file:
+
+```
+docker run --rm -it -p 5000:5000 \
+    -v $(pwd)/custom-template.html:/app/invoice-template.html benfoster/minvoice:latest
 ```
 
 This will start Minvoice at `http://localhost:5000`. You can then generate your first invoice:
@@ -55,31 +62,15 @@ This will return the generated PDF invoice in the response:
 ![Generating an invoice](/assets/postman.png)
 
 
-## Modifying the invoice template
+## Building and running locally
 
-Feel free to tweak the [invoice template](./src/Minvoice/invoice-template.html) to suit your needs. Credit for this template goes to 
+Minvoice takes advantage of a number of new features in .NET 6 and C# 10. To run locally you'll need to [install .NET 6.0 rc1](https://github.com/dotnet/installer).
 
-## Running in docker
-
-To run Minvoice in docker, first build the image:
+To build and run the application:
 
 ```
-docker build -t minvoice -f ./src/Minvoice/Dockerfile .
+dotnet run --project ./src/Minvoice/Minvoice.csproj
 ```
-
-Then run:
-
-```
-docker run --rm -it -p 5000:5000 minvoice
-```
-
-If you would like to override the invoice template when running in docker, use the following command:
-
-```
-docker run --rm -it -p 5000:5000 \
-    -v $(pwd)/custom-template.html:/app/invoice-template.html minvoice
-```
-
 ## Built with
 
 - [ASP.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
