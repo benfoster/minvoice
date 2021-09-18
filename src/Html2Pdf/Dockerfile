@@ -53,5 +53,8 @@ RUN mkdir /ms-playwright && \
 
 # Add Html2Pdf
 COPY --from=build --chown=pwuser:pwuser /publish/ /app/
-EXPOSE 80
-ENTRYPOINT [ "/app/Html2Pdf" ]
+EXPOSE 5000
+ENV ASPNETCORE_URLS=http://*:5000
+WORKDIR /app
+USER pwuser:pwuser 
+ENTRYPOINT [ "./Html2Pdf" ]
