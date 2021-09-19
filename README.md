@@ -64,7 +64,13 @@ This will return the generated PDF invoice in the response:
 
 ## Building and running locally
 
-Minvoice takes advantage of a number of new features in .NET 6 and C# 10. To run locally you'll need to [install .NET 6.0 rc1](https://github.com/dotnet/installer).
+Minvoice takes advantage of a number of new features in .NET 6 and C# 10. 
+
+To run locally you'll need to:
+- [install .NET 6.0 rc1](https://github.com/dotnet/installer)
+- install `playwright` dotnet tool globally with `dotnet tool install --global Microsoft.Playwright.CLI`
+- run `dotnet build`
+- run `playwright install`
 
 To build and run the application:
 
