@@ -41,31 +41,17 @@ app.MapPost("/invoices", async (InvoiceRequest invoiceRequest) =>
 
 app.Run();
 
-public class InvoiceRequest
+public record InvoiceRequest(
+    [Required] string CompanyName,
+    [Required] Address CompanyAddress,
+    [Required] string InvoiceNumber,
+    [Required] string Currency,
+    [Required] IEnumerable<InvoiceItem> Items,
+    [Required] Recipient Recipient,
+    string? LogoUrl = null)
 {
-
-    [Required]
-    public string? CompanyName { get; init; }
-
-    [Required]
-    public Address? CompanyAddress { get; init; }
-
-    [Required]
-    public string? InvoiceNumber { get; init; }
-
-    [Required]
-    public string? Currency { get; init; }
-
-    public string? LogoUrl { get; init; }
-
-    [Required]
-    public IEnumerable<InvoiceItem> Items { get; init; } = Array.Empty<InvoiceItem>();
-
     public DateTime Created { get; init; } = DateTime.UtcNow;
     public DateTime Due { get; init; } = DateTime.UtcNow.AddDays(30);
-
-    [Required]
-    public Recipient? Recipient { get; init; }
 
     public decimal Total => Math.Round(Items.Sum(i => i.Amount), 2);
 }
