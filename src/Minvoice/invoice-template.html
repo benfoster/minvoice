@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Invoice from {{ CompanyName }}</title>
+  <title>Invoice from {{ company_name }}</title>
 
   <style>
     body {
@@ -112,13 +112,13 @@
           <table>
             <tr>
               <td class="title">
-                <img src="{{ LogoUrl | default: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Logo_acme.svg' }}" style="width: 100%; max-width: 300px;" />
+                <img src="{{ logo_url | default: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Logo_acme.svg' }}" style="width: 100%; max-width: 300px;" />
               </td>
 
               <td>
-                Invoice #: {{ InvoiceNumber }}<br />
-                Created: {{ Created | format_date: "dd MMM yy" }}<br />
-                Due: {{ Due | format_date: "dd MMM yy" }}
+                Invoice #: {{ invoice_number }}<br />
+                Created: {{ created | format_date: "dd MMM yy" }}<br />
+                Due: {{ due | format_date: "dd MMM yy" }}
               </td>
             </tr>
           </table>
@@ -130,17 +130,17 @@
           <table>
             <tr>
               <td>
-                {{CompanyName}}<br />
-                {{CompanyAddress.Line1}}<br />
-                {{CompanyAddress.TownCity}}, {% if CompanyAddress.County %}{{CompanyAddress.County}},{% endif %} {{CompanyAddress.Zip}}
+                {{company_name}}<br />
+                {{company_address.line1}}<br />
+                {{company_address.town_city}}, {% if company_address.county %}{{company_address.county}},{% endif %} {{company_address.zip}}
               </td>
 
               <td>
-                {% if Recipient.Company %}
-                {{ Recipient.Company }}<br />
+                {% if recipient.company %}
+                {{ recipient.company }}<br />
                 {% endif %}
-                {{ Recipient.Name }}<br />
-                <a href="mailto:{{Recipient.Email}}">{{Recipient.Email}}</a>
+                {{ recipient.name }}<br />
+                <a href="mailto:{{recipient.email}}">{{recipient.email}}</a>
               </td>
             </tr>
           </table>
@@ -153,12 +153,12 @@
         <td>Price</td>
       </tr>
 
-      {% for item in Items %}
+      {% for item in items %}
 
       <tr class="item">
-        <td>{{item.Title}}</td>
+        <td>{{item.title}}</td>
 
-        <td>{{item.Amount}} {{Currency}}</td>
+        <td>{{item.amount}} {{currency}}</td>
       </tr>
 
       {% endfor %}
@@ -166,7 +166,7 @@
       <tr class="total">
         <td></td>
 
-        <td>Total: {{ Total }} {{ Currency }}</td>
+        <td>Total: {{ total }} {{ currency }}</td>
       </tr>
     </table>
   </div>

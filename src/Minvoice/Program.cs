@@ -8,6 +8,7 @@ var app = builder.Build();
 
 var templateSource = await File.ReadAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "invoice-template.html"));
 var parser = new FluidParser();
+TemplateOptions.Default.MemberAccessStrategy.MemberNameStrategy = MemberNameStrategies.SnakeCase;
 TemplateOptions.Default.MemberAccessStrategy.Register<InvoiceRequest>();
 TemplateOptions.Default.MemberAccessStrategy.Register<Recipient>();
 TemplateOptions.Default.MemberAccessStrategy.Register<Address>();
