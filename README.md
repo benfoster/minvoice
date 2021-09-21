@@ -26,34 +26,34 @@ POST http://localhost:5000/invoices HTTP/1.1
 content-type: application/json
 
 {
-  "InvoiceNumber": "123456",
-  "CompanyName": "Acme Ltd.",
-  "CompanyAddress": {
-    "Line1": "Mansfield House",
-    "TownCity": "London",
-    "Zip": "WC12 4HP"
+  "invoice_number": "123456",
+  "company_name": "Acme Ltd.",
+  "company_address": {
+    "line1": "Mansfield House",
+    "town_city": "London",
+    "zip": "WC12 4HP"
   },
-  "Currency": "GBP",
-  "Title": "Invoice from Acme",
-  "Recipient": {
-    "Name": "John Doe",
-    "Email": "johndoh@gmail.com"
+  "currency": "GBP",
+  "title": "Invoice from Acme",
+  "recipient": {
+    "name": "John Doe",
+    "email": "johndoh@gmail.com"
   },
-  "Items": [
+  "items": [
     {
-      "Title": "Website design",
-      "Amount": 300.00
+      "title": "Website design",
+      "amount": 300.00
     },
     {
-      "Title": "Hosting (3 months)",
-      "Amount": 75.00
+      "title": "Hosting (3 months)",
+      "amount": 75.00
     },
     {
-      "Title": "Domain name (1 year)",
-      "Amount": 10.00
+      "title": "Domain name (1 year)",
+      "amount": 10.00
     }
   ],
-  "LogoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/Logo_acme.svg"
+  "logo_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Logo_acme.svg"
 }
 ```
 

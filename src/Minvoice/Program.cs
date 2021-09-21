@@ -1,10 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 using Fluid;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Playwright;
+using O9d.Json.Formatting;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = new JsonSnakeCaseNamingPolicy();
+});
 
 var templateSource = await File.ReadAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "invoice-template.html"));
 var parser = new FluidParser();
@@ -18,6 +23,8 @@ if (!parser.TryParse(templateSource, out var template, out var error))
 {
     throw new Exception(error);
 }
+
+var app = builder.Build();
 
 app.MapPost("/invoices", async (InvoiceRequest invoiceRequest) =>
 {

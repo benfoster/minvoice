@@ -3,7 +3,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <!-- Publish setting -->
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>link</TrimMode>
     <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
@@ -13,6 +12,7 @@
     <PackageReference Include="Microsoft.Playwright" Version="1.14.1"/>
     <PackageReference Include="Fluid.Core" Version="2.0.13"/>
     <PackageReference Include="MinimalValidation" Version="0.2.0-pre.20210914193659.28"/>
+    <PackageReference Include="O9d.Json.Formatting" Version="0.1.0"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.html">
